@@ -14,7 +14,7 @@ export function AppSidebar() {
     <Sidebar variant="sidebar">
       <SidebarHeader className="mx-2">
         <Link
-          href="/settings"
+          href="/"
           className="bg-primary flex flex-row justify-center items-center gap-3 cursor-pointer rounded-xl py-5 mt-3 text-white"
         >
           <BadgePlus />
