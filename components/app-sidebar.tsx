@@ -26,15 +26,12 @@ export function AppSidebar() {
         <SidebarGroup />
       </SidebarContent>
       <SidebarFooter className="mx-2">
-        <SidebarButton>
-          <Link
-           href={"/settings"}
-           className="flex flex-row gap-2 justify-center"
-           >
+        <Link href={"/settings"}>
+          <SidebarButton>
             <Settings />
             <span>Settings</span>
-            </Link>
-        </SidebarButton>
+          </SidebarButton>
+        </Link>
       </SidebarFooter>
     </Sidebar>
   );
