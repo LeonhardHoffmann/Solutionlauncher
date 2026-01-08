@@ -14,7 +14,7 @@ export function AppSidebar() {
       <SidebarHeader>
         <Link
           href="/settings"
-          className="bg-primary flex flex-row justify-center items-center gap-3 cursor-pointer rounded-xl py-5 mx-2 mt-3 text-background hover:opacity-90 transition-opacity"
+          className="bg-primary flex flex-row justify-center items-center gap-3 cursor-pointer rounded-xl py-5 mx-2 mt-3 text-white"
         >
           <BadgePlus />
           <span>New Project</span>
