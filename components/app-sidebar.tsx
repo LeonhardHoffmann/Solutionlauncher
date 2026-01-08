@@ -5,16 +5,17 @@ import {
   SidebarGroup,
   SidebarHeader,
 } from "@/components/ui/sidebar";
-import { BadgePlus } from "lucide-react";
+import { BadgePlus, Settings } from "lucide-react";
 import Link from "next/link";
+import SidebarButton from "./sidebar-btn";
 
 export function AppSidebar() {
   return (
     <Sidebar variant="sidebar">
-      <SidebarHeader>
+      <SidebarHeader className="mx-2">
         <Link
           href="/settings"
-          className="bg-primary flex flex-row justify-center items-center gap-3 cursor-pointer rounded-xl py-5 mx-2 mt-3 text-white"
+          className="bg-primary flex flex-row justify-center items-center gap-3 cursor-pointer rounded-xl py-5 mt-3 text-white"
         >
           <BadgePlus />
           <span>New Project</span>
@@ -24,7 +25,17 @@ export function AppSidebar() {
         <SidebarGroup />
         <SidebarGroup />
       </SidebarContent>
-      <SidebarFooter />
+      <SidebarFooter className="mx-2">
+        <SidebarButton>
+          <Link
+           href={"/settings"}
+           className="flex flex-row gap-2 justify-center"
+           >
+            <Settings />
+            <span>Settings</span>
+            </Link>
+        </SidebarButton>
+      </SidebarFooter>
     </Sidebar>
   );
 }
