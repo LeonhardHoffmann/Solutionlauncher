@@ -7,6 +7,8 @@ import { Eye, X, Database, Cpu, ServerCog } from "lucide-react";
 export default function Home() {
   const [searchTerm, setSearchTerm] = useState("");
 
+  const steps = { frontend: true, backend: false, database: false, generation: false };
+
   const stopCreation = () => (
     setSearchTerm("")
   )
