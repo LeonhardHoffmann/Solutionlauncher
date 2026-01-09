@@ -4,6 +4,7 @@ import { Input } from "@/components/ui/input";
 import { useState } from "react";
 import { Eye, X, Database, Cpu, ServerCog } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import Techbox from "@/components/techbox";
 
 export default function Home() {
   const [searchTerm, setSearchTerm] = useState("");
@@ -30,6 +31,18 @@ export default function Home() {
     },
   ];
 
+  const backendTechnologies: Technology[] = [
+    {
+      name: "Node.js",
+      category: "backend",
+      logoUrl: "/tech-logos/nodejs.svg",
+    },
+  ]
+
+  const selectedFrontendTechnologys = [];
+  function handleSelect(technology: string) {
+    selectedFrontendTechnologys.push(technology);
+  }
   return (
     <>
       <div className="w-screen">
@@ -49,31 +62,31 @@ export default function Home() {
         <section className="my-5 mx-[300] border-3 rounded-xl p-10">
           <div className="flex flex-col gap-10">
             <div className="flex flex-row justify-center items-center gap-3">
-              <div className={`flex flex-col justify-center items-center ${steps > 0 ? "text-primary" : "text-black"}`}>
+              <div className={`flex flex-col justify-center items-center ${steps > 0 ? "text-primary" : "text-foreground"}`}>
                 <Eye />
                 <span>Frontend</span>
               </div>
-              <hr className={`hidden sm:block h-[2px] w-8 md:w-16 border-none ${steps >= 1 ? "bg-primary" : "bg-black/30"
+              <hr className={`hidden sm:block h-[2px] w-8 md:w-16 border-none ${steps >= 1 ? "bg-primary" : "bg-foreground"
                 }`}
               />
 
-              <div className={`flex flex-col justify-center items-center ${steps >= 2 ? "text-primary" : "text-black"}`}>
+              <div className={`flex flex-col justify-center items-center ${steps >= 2 ? "text-primary" : "text-foreground"}`}>
                 <ServerCog />
                 <span>Backend</span>
               </div>
-              <hr className={`hidden sm:block h-[2px] w-8 md:w-16 border-none ${steps >= 2 ? "bg-primary" : "bg-black/30"
+              <hr className={`hidden sm:block h-[2px] w-8 md:w-16 border-none ${steps >= 2 ? "bg-primary" : "bg-foreground"
                 }`}
               />
 
-              <div className={`flex flex-col justify-center items-center ${steps >= 3 ? "text-primary" : "text-black"}`}>
+              <div className={`flex flex-col justify-center items-center ${steps >= 3 ? "text-primary" : "text-foreground"}`}>
                 <Database />
                 <span>Database</span>
               </div>
-              <hr className={`hidden sm:block h-[2px] w-8 md:w-16 border-none ${steps >= 3 ? "bg-primary" : "bg-black/30"
+              <hr className={`hidden sm:block h-[2px] w-8 md:w-16 border-none ${steps >= 3 ? "bg-primary" : "bg-foreground"
                 }`}
               />
 
-              <div className={`flex flex-col justify-center items-center ${steps >= 5 ? "text-primary" : "text-black"}`}>
+              <div className={`flex flex-col justify-center items-center ${steps >= 5 ? "text-primary" : "text-foreground"}`}>
                 <Cpu />
                 <span>Generation</span>
               </div>
@@ -100,12 +113,14 @@ export default function Home() {
                 <section className={`${steps === 0 ? "block" : "hidden"}`}>
                   <div className="flex flex-row gap-3">
                     {frontendTechnologies.map(technology => (
-                      <div key={technology.name} className="flex flex-col justify-center items-center gap-4 w-30 h-30 border rounded-xl hover:bg-gray-100 cursor-pointer">
-                        <img src={technology.logoUrl} alt={`${technology.name} logo`} className="w-10 h-10" />
-                        <div>
-                          <h4 className="font-bold">{technology.name}</h4>
-                        </div>
-                      </div>
+                      <Techbox onSelect={() => handleSelect(technology.name)} key={technology.name} name={technology.name} logoUrl={technology.logoUrl}></Techbox>
+                    ))}
+                  </div>
+                </section>
+                <section className={`${steps === 1 ? "block" : "hidden"}`}>
+                  <div className="flex flex-row gap-3">
+                    {backendTechnologies.map(technology => (
+                      <Techbox key={technology.name} name={technology.name} logoUrl={technology.logoUrl}></Techbox>
                     ))}
                   </div>
                 </section>
