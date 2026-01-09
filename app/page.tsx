@@ -13,7 +13,6 @@ export default function Home() {
 
   type Technology = {
     name: string;
-    description: string;
     category: "frontend" | "backend" | "database";
     logoUrl: string;
   }
@@ -21,13 +20,11 @@ export default function Home() {
   const frontendTechnologies: Technology[] = [
     {
       name: "React",
-      description: "A JavaScript library for building user interfaces.",
       category: "frontend",
-      logoUrl: "/logos/react.png",
+      logoUrl: "/tech-logos/react.svg",
     },
     {
       name: "Vue.js",
-      description: "The Progressive JavaScript Framework.",
       category: "frontend",
       logoUrl: "/logos/vue.png",
     },
@@ -103,11 +100,10 @@ export default function Home() {
                 <section className={`${steps === 0 ? "block" : "hidden"}`}>
                   <div className="flex flex-row gap-3">
                     {frontendTechnologies.map(technology => (
-                      <div key={technology.name} className="flex flex-col justify-center items-center gap-4 p-4 border rounded-xl hover:bg-gray-100 cursor-pointer">
+                      <div key={technology.name} className="flex flex-col justify-center items-center gap-4 w-30 h-30 border rounded-xl hover:bg-gray-100 cursor-pointer">
                         <img src={technology.logoUrl} alt={`${technology.name} logo`} className="w-10 h-10" />
                         <div>
                           <h4 className="font-bold">{technology.name}</h4>
-                          <p className="text-sm text-gray-500">{technology.description}</p>
                         </div>
                       </div>
                     ))}
