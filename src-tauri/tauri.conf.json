@@ -12,11 +12,14 @@
   "app": {
     "windows": [
       {
+        "label": "main",
         "title": "Solutionlauncher",
-        "width": 800,
-        "height": 600,
+        "width": 1200,
+        "height": 750,
+        "minWidth": 1200,
+        "minHeight": 850,
         "resizable": true,
-        "fullscreen": false
+        "center": true
       }
     ],
     "security": {
