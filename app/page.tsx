@@ -86,11 +86,11 @@ export default function Home() {
                     back
                   </Button>
                   <Button
-                    disabled={steps >= 3}
+                    disabled={steps >= 4}
                     className="flex self-end bg-primary text-white rounded-xl px-5 py-2 cursor-pointer"
                     onClick={() => setSteps(steps + 1)}
                   >
-                    next
+                    {steps <= 2 ? "next" : "generate"}
                   </Button>
                 </div>
               </div>
