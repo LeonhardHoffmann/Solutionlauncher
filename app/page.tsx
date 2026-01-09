@@ -131,15 +131,15 @@ export default function Home() {
                 </section>
                 <div className="flex flex-row justify-between">
                   <Button
-                    disabled={steps <= 0}
-                    className="flex self-end bg-primary text-white rounded-xl px-5 py-2 cursor-pointer"
+                    disabled={steps <= 0 || selectedFrontendTechnologys.length === 0}
+                    className={`flex self-end bg-primary text-white rounded-xl px-5 py-2 cursor-pointer`}
                     onClick={() => setSteps(steps - 1)}
                   >
                     back
                   </Button>
                   <Button
                     disabled={steps >= 5 || selectedFrontendTechnologys.length === 0}
-                    className="flex self-end bg-primary text-white rounded-xl px-5 py-2 cursor-pointer"
+                    className={`flex self-end bg-primary text-white rounded-xl px-5 py-2 cursor-pointer`}
                     onClick={() => setSteps(steps + 1)}
                   >
                     {steps <= 3 ? "next" : "generate"}
