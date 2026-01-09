@@ -11,6 +11,8 @@ export default function Home() {
 
   const [steps, setSteps] = useState(0);
   const stopCreation = () => setSearchTerm("");
+  const [selectedFrontendTechnologys, setSelectedFrontendTechnologys] = useState<string[]>([]);
+  const [selectedBackendTechnologies, setSelectedBackendTechnologies] = useState<string[]>([]);
 
   type Technology = {
     name: string;
@@ -39,9 +41,12 @@ export default function Home() {
     },
   ]
 
-  const selectedFrontendTechnologys = [];
   function handleSelect(technology: string) {
-    selectedFrontendTechnologys.push(technology);
+    if (selectedFrontendTechnologys.includes(technology)) {
+      setSelectedFrontendTechnologys(selectedFrontendTechnologys.filter(current => current !== technology));
+    } else {
+      setSelectedFrontendTechnologys([...selectedFrontendTechnologys, technology]);
+    }
   }
   return (
     <>
@@ -113,14 +118,14 @@ export default function Home() {
                 <section className={`${steps === 0 ? "block" : "hidden"}`}>
                   <div className="flex flex-row gap-3">
                     {frontendTechnologies.map(technology => (
-                      <Techbox onSelect={() => handleSelect(technology.name)} key={technology.name} name={technology.name} logoUrl={technology.logoUrl}></Techbox>
+                      <Techbox selected={selectedFrontendTechnologys.includes(technology.name)} onSelect={() => handleSelect(technology.name)} key={technology.name} name={technology.name} logoUrl={technology.logoUrl}></Techbox>
                     ))}
                   </div>
                 </section>
                 <section className={`${steps === 1 ? "block" : "hidden"}`}>
                   <div className="flex flex-row gap-3">
                     {backendTechnologies.map(technology => (
-                      <Techbox key={technology.name} name={technology.name} logoUrl={technology.logoUrl}></Techbox>
+                      <Techbox selected={selectedBackendTechnologies.includes(technology.name)} onSelect={() => handleSelect(technology.name)} key={technology.name} name={technology.name} logoUrl={technology.logoUrl}></Techbox>
                     ))}
                   </div>
                 </section>
@@ -133,7 +138,7 @@ export default function Home() {
                     back
                   </Button>
                   <Button
-                    disabled={steps >= 5}
+                    disabled={steps >= 5 || selectedFrontendTechnologys.length === 0}
                     className="flex self-end bg-primary text-white rounded-xl px-5 py-2 cursor-pointer"
                     onClick={() => setSteps(steps + 1)}
                   >
