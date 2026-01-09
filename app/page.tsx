@@ -90,7 +90,7 @@ export default function Home() {
                     className="flex self-end bg-primary text-white rounded-xl px-5 py-2 cursor-pointer"
                     onClick={() => setSteps(steps + 1)}
                   >
-                    {steps <= 2 ? "next" : "generate"}
+                    {steps <= 1 ? "next" : "generate"}
                   </Button>
                 </div>
               </div>
