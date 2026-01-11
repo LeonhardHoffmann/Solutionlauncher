@@ -13,6 +13,7 @@ export default function Home() {
   const stopCreation = () => setSearchTerm("");
   const [selectedFrontendTechnologys, setSelectedFrontendTechnologys] = useState<string[]>([]);
   const [selectedBackendTechnologies, setSelectedBackendTechnologies] = useState<string[]>([]);
+  const [configuration, setConfiguration] = useState<Technology[]>([])
 
   type Technology = {
     name: string;
