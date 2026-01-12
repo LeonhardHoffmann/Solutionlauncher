@@ -15,6 +15,8 @@ export default function Home() {
     useState<string[]>([]);
   const [selectedBackendTechnologies, setSelectedBackendTechnologies] =
     useState<string[]>([]);
+  const [selectedDatabaseTechnologies, setSelectedDatabaseTechnologies] =
+    useState<string[]>([]);
   const [configuration, setConfiguration] = useState<Technology[]>([]);
 
   const selectedTechnologies = [selectedFrontendTechnologys, selectedBackendTechnologies];
@@ -46,6 +48,14 @@ export default function Home() {
     },
   ];
 
+  const databaseTechnologies: Technology[] = [
+    {
+      name: "MongoDB",
+      category: "database",
+      logoUrl: "/tech-logos/mongodb.svg",
+    },
+  ];
+
   function handleSelect(technology: string) {
     if (steps === 0) {
       if (selectedFrontendTechnologys.includes(technology)) {
@@ -58,6 +68,12 @@ export default function Home() {
         setSelectedBackendTechnologies(selectedBackendTechnologies.filter((t) => t !== technology));
       } else {
         setSelectedBackendTechnologies([...selectedBackendTechnologies, technology]);
+      }
+    } else if (steps === 2) {
+      if (selectedDatabaseTechnologies.includes(technology)) {
+        setSelectedDatabaseTechnologies(selectedDatabaseTechnologies.filter((t) => t !== technology));
+      } else {
+        setSelectedDatabaseTechnologies([...selectedDatabaseTechnologies, technology]);
       }
     }
   }
@@ -180,6 +196,23 @@ export default function Home() {
                       ></Techbox>
                     ))}
                   </div>
+                </section>
+                <section className={`${steps === 2 ? "block" : "hidden"}`}>
+                  <div className="flex flex-row gap-3">
+                    {databaseTechnologies.map((technology) => (
+                      <Techbox
+                        selected={selectedDatabaseTechnologies.includes(
+                          technology.name
+                        )}
+                        onSelect={() => handleSelect(technology.name)}
+                        key={technology.name}
+                        name={technology.name}
+                        logoUrl={technology.logoUrl}
+                      ></Techbox>
+                    ))}
+                  </div>
+                </section>
+                <section className={`${steps === 3 ? "block" : "hidden"}`}>
                 </section>
                 <div className="flex flex-row justify-between">
                   <Button
