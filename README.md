@@ -2,7 +2,7 @@
 
 **Solutionlauncher** is a modern desktop application that streamlines your development workflow. Instead of wasting time setting up configurations, you can simply select your preferred technologies and jump straight into coding.
 
-<img width="1917" height="1029" alt="grafik" src="https://github.com/user-attachments/assets/c2fb705c-9b4d-49b3-9f9d-cab27579b5cb" />
+<img width="1919" height="1029" alt="grafik" src="https://github.com/user-attachments/assets/56b17456-9eae-4833-9b3e-4f842d78a437" />
 
 ## 💡 How it works
 
