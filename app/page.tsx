@@ -77,9 +77,18 @@ export default function Home() {
       }
     }
   }
-  function handleSearch(searchTerm: string) {
-    console.log(frontendTechnologies.some(technology => technology.name.toLowerCase().includes(searchTerm.toLowerCase())));
-  }
+  // Filter technologies based on search term
+  const filteredFrontendTechnologies = frontendTechnologies.filter((technology) =>
+    technology.name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+  const filteredBackendTechnologies = backendTechnologies.filter((technology) =>
+    technology.name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+  const filteredDatabaseTechnologies = databaseTechnologies.filter((technology) =>
+    technology.name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
   return (
     <>
       <div className="w-screen">
@@ -151,10 +160,7 @@ export default function Home() {
                     <Input
                       placeholder={steps == 0 ? "search for a frontend technology..." : steps == 1 ? "search for a backend technology..." : "search for a database technology..."}
                       value={searchTerm}
-                      onChange={(e) => (
-                        setSearchTerm(e.target.value),
-                        handleSearch(searchTerm)
-                      )}
+                      onChange={(e) => setSearchTerm(e.target.value)}
                       className={`rounded-xl ${steps >= 3 ? "hidden" : "block"}`}
                     ></Input>
                     <button
@@ -169,47 +175,59 @@ export default function Home() {
                 {/*-- Technology Selection --*/}
                 <section className={`${steps === 0 ? "block" : "hidden"}`}>
                   <div className="flex flex-row gap-3">
-                    {frontendTechnologies.map((technology) => (
-                      <Techbox
-                        selected={selectedFrontendTechnologys.includes(
-                          technology.name
-                        )}
-                        onSelect={() => handleSelect(technology.name)}
-                        key={technology.name}
-                        name={technology.name}
-                        logoUrl={technology.logoUrl}
-                      ></Techbox>
-                    ))}
+                    {filteredFrontendTechnologies.length > 0 ? (
+                      filteredFrontendTechnologies.map((technology) => (
+                        <Techbox
+                          selected={selectedFrontendTechnologys.includes(
+                            technology.name
+                          )}
+                          onSelect={() => handleSelect(technology.name)}
+                          key={technology.name}
+                          name={technology.name}
+                          logoUrl={technology.logoUrl}
+                        ></Techbox>
+                      ))
+                    ) : (
+                      <p className="text-gray-500">No results found</p>
+                    )}
                   </div>
                 </section>
                 <section className={`${steps === 1 ? "block" : "hidden"}`}>
                   <div className="flex flex-row gap-3">
-                    {backendTechnologies.map((technology) => (
-                      <Techbox
-                        selected={selectedBackendTechnologies.includes(
-                          technology.name
-                        )}
-                        onSelect={() => handleSelect(technology.name)}
-                        key={technology.name}
-                        name={technology.name}
-                        logoUrl={technology.logoUrl}
-                      ></Techbox>
-                    ))}
+                    {filteredBackendTechnologies.length > 0 ? (
+                      filteredBackendTechnologies.map((technology) => (
+                        <Techbox
+                          selected={selectedBackendTechnologies.includes(
+                            technology.name
+                          )}
+                          onSelect={() => handleSelect(technology.name)}
+                          key={technology.name}
+                          name={technology.name}
+                          logoUrl={technology.logoUrl}
+                        ></Techbox>
+                      ))
+                    ) : (
+                      <p className="text-gray-500">No results found</p>
+                    )}
                   </div>
                 </section>
                 <section className={`${steps === 2 ? "block" : "hidden"}`}>
                   <div className="flex flex-row gap-3">
-                    {databaseTechnologies.map((technology) => (
-                      <Techbox
-                        selected={selectedDatabaseTechnologies.includes(
-                          technology.name
-                        )}
-                        onSelect={() => handleSelect(technology.name)}
-                        key={technology.name}
-                        name={technology.name}
-                        logoUrl={technology.logoUrl}
-                      ></Techbox>
-                    ))}
+                    {filteredDatabaseTechnologies.length > 0 ? (
+                      filteredDatabaseTechnologies.map((technology) => (
+                        <Techbox
+                          selected={selectedDatabaseTechnologies.includes(
+                            technology.name
+                          )}
+                          onSelect={() => handleSelect(technology.name)}
+                          key={technology.name}
+                          name={technology.name}
+                          logoUrl={technology.logoUrl}
+                        ></Techbox>
+                      ))
+                    ) : (
+                      <p className="text-gray-500">No results found</p>
+                    )}
                   </div>
                 </section>
                 <section className={`${steps === 3 ? "block" : "hidden"}`}>
