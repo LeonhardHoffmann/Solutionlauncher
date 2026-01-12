@@ -8,11 +8,11 @@ import Techbox from "@/components/techbox";
 
 export default function Home() {
   const [searchTerm, setSearchTerm] = useState("");
-
-  const [steps, setSteps] = useState(0);
-  const stopCreation = () => setSearchTerm("");
   const [selectedFrontendTechnologys, setSelectedFrontendTechnologys] = useState<string[]>([]);
   const [selectedBackendTechnologies, setSelectedBackendTechnologies] = useState<string[]>([]);
+  
+  const [steps, setSteps] = useState(0);
+  const stopCreation = () => setSearchTerm("");
 
   type Technology = {
     name: string;
@@ -47,6 +47,10 @@ export default function Home() {
     } else {
       setSelectedFrontendTechnologys([...selectedFrontendTechnologys, technology]);
     }
+  }
+
+  function handleSearch(searchTerm: string) {
+    console.log(frontendTechnologies.some(technology => technology.name.toLowerCase().includes(searchTerm.toLowerCase())));
   }
   return (
     <>
@@ -103,7 +107,10 @@ export default function Home() {
                   <Input
                     placeholder="search for a frontend technology..."
                     value={searchTerm}
-                    onChange={(e) => setSearchTerm(e.target.value)}
+                    onChange={(e) => (
+                      setSearchTerm(e.target.value),
+                      handleSearch(searchTerm)
+                    )}
                     className="rounded-xl"
                   ></Input>
                   <button
