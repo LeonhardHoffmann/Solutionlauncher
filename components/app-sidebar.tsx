@@ -21,8 +21,10 @@ export function AppSidebar() {
           <span>New Project</span>
         </Link>
       </SidebarHeader>
-      <SidebarContent>
-        <SidebarGroup />
+      <SidebarContent className="mx-2 my-10">
+        <SidebarGroup>
+          <SidebarButton>Latest Configurations</SidebarButton>
+        </SidebarGroup>
         <SidebarGroup />
       </SidebarContent>
       <SidebarFooter className="mx-2">
