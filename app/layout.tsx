@@ -42,7 +42,7 @@ export default function RootLayout({
             <main>
               <div className="flex flex-row justify-between items-center">
                 <SidebarTrigger />
-                <StarRepoBtn/>
+                <StarRepoBtn className="mr-5"/>
               </div>
               {children}
             </main>
