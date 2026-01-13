@@ -4,6 +4,7 @@ import "./globals.css";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/app-sidebar";
 import { ThemeProvider } from "next-themes";
+import StarRepoBtn from "@/components/star-repo-btn";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -39,7 +40,10 @@ export default function RootLayout({
           <SidebarProvider>
             <AppSidebar />
             <main>
-              <SidebarTrigger />
+              <div className="flex flex-row justify-between items-center">
+                <SidebarTrigger />
+                <StarRepoBtn className="mr-5"/>
+              </div>
               {children}
             </main>
           </SidebarProvider>
