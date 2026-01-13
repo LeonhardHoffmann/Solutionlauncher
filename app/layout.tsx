@@ -4,8 +4,7 @@ import "./globals.css";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/app-sidebar";
 import { ThemeProvider } from "next-themes";
-import Link from "next/link";
-import { Star } from "lucide-react";
+import StarRepoBtn from "@/components/star-repo-btn";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -43,7 +42,7 @@ export default function RootLayout({
             <main>
               <div className="flex flex-row justify-between items-center">
                 <SidebarTrigger />
-                <Link href={"https://github.com/LeonhardHoffmann/Solutionlauncher"} className="mr-10"><Star className="text-[#ffe100] size-9"/></Link>
+                <StarRepoBtn/>
               </div>
               {children}
             </main>
