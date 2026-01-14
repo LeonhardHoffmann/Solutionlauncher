@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { open } from "@tauri-apps/plugin-dialog"; 
 import ThemeSwitcher from "@/components/theme-switcher-02";
 
@@ -16,13 +16,19 @@ export default function Settings() {
       });
 
       if (selected) {
-        setSelectedPath(selected as string);
-        console.log("Gewählter Pfad:", selected);
+        setSelectedPath(selected);
+        localStorage.setItem("selectedPath", selected)
       }
     } catch (error) {
       console.error("Fehler beim Öffnen des Dialogs:", error);
     }
   };
+
+  useEffect(() => {
+    if(localStorage.getItem("selectedPath")?.length != 0) {
+      setSelectedPath(localStorage.getItem("selectedPath"))
+    } 
+  })
 
   return (
     <>
