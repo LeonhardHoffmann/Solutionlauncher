@@ -28,7 +28,7 @@ export default function Settings() {
     if(localStorage.getItem("selectedPath")?.length != 0) {
       setSelectedPath(localStorage.getItem("selectedPath"))
     } 
-  })
+  }, [])
 
   return (
     <>
