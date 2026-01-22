@@ -8,4 +8,11 @@ export const backendTechnologies: Technology[] = [
         logoUrl: "/tech-logos/node.svg",
         priority: 20
     },
+    {
+        id: "python",
+        name: "Python",
+        category: "backend",
+        logoUrl: "/tech-logos/python.svg",
+        priority: 20,
+    }
 ];
