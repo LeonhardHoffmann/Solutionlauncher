@@ -6,6 +6,10 @@ import { Eye, X, Database, Cpu, ServerCog } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Techbox from "@/components/techbox";
 import { Spinner } from "@/components/ui/spinner";
+import { Technology } from "@/lib/types";
+import { frontendTechnologies } from "@/lib/technologies/frontend-technologies";
+import { backendTechnologies } from "@/lib/technologies/backend-technologies";
+import { databaseTechnologies } from "@/lib/technologies/database-technologies";
 
 export default function Home() {
   const [searchTerm, setSearchTerm] = useState("");
@@ -21,52 +25,6 @@ export default function Home() {
   const [configuration, setConfiguration] = useState<Technology[]>([]);
 
   const selectedTechnologies = [selectedFrontendTechnologys, selectedBackendTechnologies, selectedDatabaseTechnologies];
-  type Technology = {
-    id: string; 
-    name: string;
-    category: "frontend" | "backend" | "database";
-    logoUrl: string;
-    dependencies?: string[],
-    priority: number,
-  };
-
-  const frontendTechnologies: Technology[] = [
-    {
-      id: "react", 
-      name: "React",
-      category: "frontend",
-      logoUrl: "/tech-logos/react.svg",
-      priority: 10,
-    },
-    {
-      id: "vue", 
-      name: "Vue.js",
-      category: "frontend",
-      logoUrl: "/tech-logos/vue.svg",
-      priority: 10,
-    },
-  ];
-
-
-  const backendTechnologies: Technology[] = [
-    {
-      id: "node", 
-      name: "Node.js",
-      category: "backend",
-      logoUrl: "/tech-logos/node.svg",
-      priority: 20
-    },
-  ];
-
-  const databaseTechnologies: Technology[] = [
-    {
-      id: "mongodb", 
-      name: "MongoDB",
-      category: "database",
-      logoUrl: "/tech-logos/mongodb.svg",
-      priority: 20,
-    },
-  ];
 
   function handleSelect(technology: string) {
     if (steps === 0) {

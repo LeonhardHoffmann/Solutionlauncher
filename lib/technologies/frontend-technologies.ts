@@ -1,6 +1,6 @@
 import { Technology} from "../types"
 
-const frontendTechnologies: Technology[] = [
+export const frontendTechnologies: Technology[] = [
     {
         id: "react",
         name: "React",

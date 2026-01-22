@@ -1,6 +1,6 @@
 import { Technology } from "../types";
 
-const backendTechnologies: Technology[] = [
+export const backendTechnologies: Technology[] = [
     {
         id: "node",
         name: "Node.js",
