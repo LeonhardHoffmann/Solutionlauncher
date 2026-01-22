@@ -1,3 +1,5 @@
+import { Technology } from "../types";
+
 const backendTechnologies: Technology[] = [
     {
         id: "node",

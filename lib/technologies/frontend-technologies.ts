@@ -1,11 +1,4 @@
-type Technology = {
-    id: string;
-    name: string;
-    category: "frontend" | "backend" | "database";
-    logoUrl: string;
-    dependencies?: string[],
-    priority: number,
-};
+import { Technology} from "../types"
 
 const frontendTechnologies: Technology[] = [
     {
