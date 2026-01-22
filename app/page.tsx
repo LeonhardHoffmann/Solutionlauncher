@@ -10,6 +10,7 @@ import { Technology } from "@/lib/types";
 import { frontendTechnologies } from "@/lib/technologies/frontend-technologies";
 import { backendTechnologies } from "@/lib/technologies/backend-technologies";
 import { databaseTechnologies } from "@/lib/technologies/database-technologies";
+import { Command } from "@tauri-apps/plugin-shell";
 
 export default function Home() {
   const [searchTerm, setSearchTerm] = useState("");
@@ -47,15 +48,34 @@ export default function Home() {
       }
     }
   }
+
+  async function handleGenerate() {
+    try {
+      const cmd = Command.create("npx-script", ["create-next-app@latest", "sola-project", "--typescript", "--tailwind", "--eslint"])
+      
+      const child = await cmd.spawn()
+
+      const result = await cmd.execute()
+
+      if (result.code === 0) {
+        alert("erfolgreich")
+      } else {
+        alert("fehler")
+        setSteps(3)
+      }
+    } catch (error) {
+      alert(error)
+      setSteps(3)
+    }
+  }
+  
   // Filter technologies based on search term
   const filteredFrontendTechnologies = frontendTechnologies.filter((technology) =>
     technology.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
-
   const filteredBackendTechnologies = backendTechnologies.filter((technology) =>
     technology.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
-
   const filteredDatabaseTechnologies = databaseTechnologies.filter((technology) =>
     technology.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
