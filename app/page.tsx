@@ -26,6 +26,8 @@ export default function Home() {
     name: string;
     category: "frontend" | "backend" | "database";
     logoUrl: string;
+    dependencies?: string[],
+    priority: number,
   };
 
   const frontendTechnologies: Technology[] = [
@@ -34,12 +36,14 @@ export default function Home() {
       name: "React",
       category: "frontend",
       logoUrl: "/tech-logos/react.svg",
+      priority: 10,
     },
     {
       id: "vue", 
       name: "Vue.js",
       category: "frontend",
       logoUrl: "/tech-logos/vue.svg",
+      priority: 10,
     },
   ];
 
@@ -50,6 +54,7 @@ export default function Home() {
       name: "Node.js",
       category: "backend",
       logoUrl: "/tech-logos/node.svg",
+      priority: 20
     },
   ];
 
@@ -59,6 +64,7 @@ export default function Home() {
       name: "MongoDB",
       category: "database",
       logoUrl: "/tech-logos/mongodb.svg",
+      priority: 20,
     },
   ];
 
