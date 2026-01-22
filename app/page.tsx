@@ -51,8 +51,16 @@ export default function Home() {
 
   async function handleGenerate() {
     try {
-      const cmd = Command.create("npx-script", ["create-next-app@latest", "sola-project", "--typescript", "--tailwind", "--eslint"])
-      
+      const savedPath = localStorage.getItem("selectedPath") || ""
+
+      const cmd = Command.create("npx-script", [
+        "create-next-app@latest",
+        "mein-neues-projekt",
+        "--typescript"
+      ], {
+        cwd: savedPath 
+      });
+
       const child = await cmd.spawn()
 
       const result = await cmd.execute()
@@ -68,7 +76,7 @@ export default function Home() {
       setSteps(3)
     }
   }
-  
+
   // Filter technologies based on search term
   const filteredFrontendTechnologies = frontendTechnologies.filter((technology) =>
     technology.name.toLowerCase().includes(searchTerm.toLowerCase())
@@ -221,7 +229,7 @@ export default function Home() {
                   </div>
                 </section>
                 <section className={`${steps === 4 ? "block" : "hidden"} flex justify-center`}>
-                  <Spinner className="w-15 h-15 text-primary"/>
+                  <Spinner className="w-15 h-15 text-primary" />
                 </section>
                 <section className={`${steps === 3 ? "block" : "hidden"}`}>
                   <div className="flex flex-col gap-2">
