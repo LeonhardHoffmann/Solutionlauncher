@@ -22,6 +22,7 @@ export default function Home() {
 
   const selectedTechnologies = [selectedFrontendTechnologys, selectedBackendTechnologies, selectedDatabaseTechnologies];
   type Technology = {
+    id: string; 
     name: string;
     category: "frontend" | "backend" | "database";
     logoUrl: string;
@@ -29,11 +30,13 @@ export default function Home() {
 
   const frontendTechnologies: Technology[] = [
     {
+      id: "react", 
       name: "React",
       category: "frontend",
       logoUrl: "/tech-logos/react.svg",
     },
     {
+      id: "vue", 
       name: "Vue.js",
       category: "frontend",
       logoUrl: "/tech-logos/vue.svg",
@@ -43,6 +46,7 @@ export default function Home() {
 
   const backendTechnologies: Technology[] = [
     {
+      id: "node", 
       name: "Node.js",
       category: "backend",
       logoUrl: "/tech-logos/node.svg",
@@ -51,6 +55,7 @@ export default function Home() {
 
   const databaseTechnologies: Technology[] = [
     {
+      id: "mongodb", 
       name: "MongoDB",
       category: "database",
       logoUrl: "/tech-logos/mongodb.svg",
