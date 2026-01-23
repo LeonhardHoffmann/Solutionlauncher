@@ -6,6 +6,12 @@ import { Eye, X, Database, Cpu, ServerCog } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Techbox from "@/components/techbox";
 import { Spinner } from "@/components/ui/spinner";
+import { Technology } from "@/lib/types";
+import { frontendTechnologies } from "@/lib/technologies/frontend-technologies";
+import { backendTechnologies } from "@/lib/technologies/backend-technologies";
+import { databaseTechnologies } from "@/lib/technologies/database-technologies";
+import { Command } from "@tauri-apps/plugin-shell";
+import { invoke } from "@tauri-apps/api/core";
 
 export default function Home() {
   const [searchTerm, setSearchTerm] = useState("");
@@ -21,41 +27,6 @@ export default function Home() {
   const [configuration, setConfiguration] = useState<Technology[]>([]);
 
   const selectedTechnologies = [selectedFrontendTechnologys, selectedBackendTechnologies, selectedDatabaseTechnologies];
-  type Technology = {
-    name: string;
-    category: "frontend" | "backend" | "database";
-    logoUrl: string;
-  };
-
-  const frontendTechnologies: Technology[] = [
-    {
-      name: "React",
-      category: "frontend",
-      logoUrl: "/tech-logos/react.svg",
-    },
-    {
-      name: "Vue.js",
-      category: "frontend",
-      logoUrl: "/tech-logos/vue.svg",
-    },
-  ];
-
-
-  const backendTechnologies: Technology[] = [
-    {
-      name: "Node.js",
-      category: "backend",
-      logoUrl: "/tech-logos/node.svg",
-    },
-  ];
-
-  const databaseTechnologies: Technology[] = [
-    {
-      name: "MongoDB",
-      category: "database",
-      logoUrl: "/tech-logos/mongodb.svg",
-    },
-  ];
 
   function handleSelect(technology: string) {
     if (steps === 0) {
@@ -78,15 +49,37 @@ export default function Home() {
       }
     }
   }
+
+  async function handleGenerate() {
+    try {
+      setSteps(4); 
+
+      const selectedPath = localStorage.getItem("selectedPath");
+      if (!selectedPath) {
+        alert("Bitte wähle zuerst einen Installationspfad aus.");
+        setSteps(3);
+        return;
+      }
+
+      await invoke("create_next_app", { path: selectedPath });
+
+      setSteps(5);
+      alert("Projekt erfolgreich erstellt 🎉");
+    } catch (error) {
+      setSteps(3);
+      alert("Fehler bei der Erstellung: " + String(error));
+    }
+  }
+
+
+
   // Filter technologies based on search term
   const filteredFrontendTechnologies = frontendTechnologies.filter((technology) =>
     technology.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
-
   const filteredBackendTechnologies = backendTechnologies.filter((technology) =>
     technology.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
-
   const filteredDatabaseTechnologies = databaseTechnologies.filter((technology) =>
     technology.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
@@ -232,7 +225,7 @@ export default function Home() {
                   </div>
                 </section>
                 <section className={`${steps === 4 ? "block" : "hidden"} flex justify-center`}>
-                  <Spinner className="w-15 h-15 text-primary"/>
+                  <Spinner className="w-15 h-15 text-primary" />
                 </section>
                 <section className={`${steps === 3 ? "block" : "hidden"}`}>
                   <div className="flex flex-col gap-2">
@@ -254,14 +247,18 @@ export default function Home() {
                   </Button>
                   <Button
                     disabled={
-                      steps >= 4 || selectedFrontendTechnologys.length === 0
+                      (steps <= 2 && selectedFrontendTechnologys.length === 0) ||
+                      steps >= 4
                     }
-                    className={`flex self-end bg-primary text-white rounded-xl px-5 py-2 cursor-pointer`}
+                    className="flex self-end bg-primary text-white rounded-xl px-5 py-2 cursor-pointer"
                     onClick={() => {
-                      setSteps(steps + 1),
-                        setConfiguration(frontendTechnologies)
-                    }
-                    }
+                      if (steps <= 2) {
+                        setSteps(steps + 1)
+                      } else {
+                        setSteps(4)
+                        handleGenerate()
+                      }
+                    }}
                   >
                     {steps <= 2 ? "next" : "generate"}
                   </Button>
