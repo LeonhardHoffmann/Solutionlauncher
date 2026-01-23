@@ -11,6 +11,7 @@ import { frontendTechnologies } from "@/lib/technologies/frontend-technologies";
 import { backendTechnologies } from "@/lib/technologies/backend-technologies";
 import { databaseTechnologies } from "@/lib/technologies/database-technologies";
 import { Command } from "@tauri-apps/plugin-shell";
+import { invoke } from "@tauri-apps/api/core";
 
 export default function Home() {
   const [searchTerm, setSearchTerm] = useState("");
@@ -51,31 +52,20 @@ export default function Home() {
 
   async function handleGenerate() {
     try {
-      const savedPath = localStorage.getItem("selectedPath") || ""
+      setSteps(4); // Spinner anzeigen
 
-      const cmd = Command.create("npx-script", [
-        "create-next-app@latest",
-        "mein-neues-projekt",
-        "--typescript"
-      ], {
-        cwd: savedPath 
-      });
+      // invoke deinen Rust Command
+      await invoke("create_next_app");
 
-      const child = await cmd.spawn()
-
-      const result = await cmd.execute()
-
-      if (result.code === 0) {
-        alert("erfolgreich")
-      } else {
-        alert("fehler")
-        setSteps(3)
-      }
+      // nach Abschluss
+      setSteps(5); // Generation abgeschlossen
+      alert("Projekt erfolgreich erstellt 🎉");
     } catch (error) {
-      alert(error)
-      setSteps(3)
+      setSteps(3); // Fehlerstatus
+      alert("Fehler bei der Erstellung: " + String(error));
     }
   }
+
 
   // Filter technologies based on search term
   const filteredFrontendTechnologies = frontendTechnologies.filter((technology) =>
@@ -251,14 +241,18 @@ export default function Home() {
                   </Button>
                   <Button
                     disabled={
-                      steps >= 4 || selectedFrontendTechnologys.length === 0
+                      (steps <= 2 && selectedFrontendTechnologys.length === 0) ||
+                      steps >= 4
                     }
-                    className={`flex self-end bg-primary text-white rounded-xl px-5 py-2 cursor-pointer`}
+                    className="flex self-end bg-primary text-white rounded-xl px-5 py-2 cursor-pointer"
                     onClick={() => {
-                      setSteps(steps + 1),
-                        setConfiguration(frontendTechnologies)
-                    }
-                    }
+                      if (steps <= 2) {
+                        setSteps(steps + 1)
+                      } else {
+                        setSteps(4)
+                        handleGenerate()
+                      }
+                    }}
                   >
                     {steps <= 2 ? "next" : "generate"}
                   </Button>
