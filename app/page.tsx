@@ -54,17 +54,26 @@ export default function Home() {
     try {
       setSteps(4); // Spinner anzeigen
 
-      // invoke deinen Rust Command
-      await invoke("create_next_app");
+      // Path aus localStorage holen
+      const selectedPath = localStorage.getItem("selectedPath");
+      if (!selectedPath) {
+        alert("Bitte wähle zuerst einen Installationspfad aus.");
+        setSteps(3);
+        return;
+      }
 
-      // nach Abschluss
-      setSteps(5); // Generation abgeschlossen
+      // Rust Command aufrufen
+      await invoke("create_next_app", { path: selectedPath });
+
+      // Fertig
+      setSteps(5);
       alert("Projekt erfolgreich erstellt 🎉");
     } catch (error) {
-      setSteps(3); // Fehlerstatus
+      setSteps(3);
       alert("Fehler bei der Erstellung: " + String(error));
     }
   }
+
 
 
   // Filter technologies based on search term
