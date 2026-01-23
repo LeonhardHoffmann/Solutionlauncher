@@ -52,9 +52,8 @@ export default function Home() {
 
   async function handleGenerate() {
     try {
-      setSteps(4); // Spinner anzeigen
+      setSteps(4); 
 
-      // Path aus localStorage holen
       const selectedPath = localStorage.getItem("selectedPath");
       if (!selectedPath) {
         alert("Bitte wähle zuerst einen Installationspfad aus.");
@@ -62,10 +61,8 @@ export default function Home() {
         return;
       }
 
-      // Rust Command aufrufen
       await invoke("create_next_app", { path: selectedPath });
 
-      // Fertig
       setSteps(5);
       alert("Projekt erfolgreich erstellt 🎉");
     } catch (error) {
