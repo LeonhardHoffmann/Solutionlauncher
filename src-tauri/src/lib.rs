@@ -4,7 +4,7 @@ use std::process::Command;
 fn create_next_app(path: String) {
     tauri::async_runtime::spawn(async move {
         let _ = Command::new("npx")
-            .current_dir(path) // LocalStorage-Pfad wird hier verwendet
+            .current_dir(path) 
             .args(["create-next-app@latest", "test", "--yes"])
             .status();
     });
