@@ -104,21 +104,21 @@ export default function Home() {
   );
   return (
     <>
-      <div className="w-screen">
-        <h1 className="text-primary flex justify-center w-full font-bold text-7xl">
-          Create new Project
-        </h1>
-        <section>
-          <div>
-            <h2 className="text-center text-2xl font-semibold mt-10">
+      <div className="w-screen h-screen px-4 sm:px-6 md:px-8 lg:px-30">
+        <section className="flex flex-col gap-3 pb-5">
+          <h1 className="text-primary flex justify-center w-full font-bold text-7xl">
+            Create new Project
+          </h1>
+          <div className="flex flex-col gap-2">
+            <h2 className="text-center text-2xl font-semibold">
               Select a frontend technology
             </h2>
-            <p className="text-center text-md mt-2 text-gray-500">
+            <p className="text-center text-md text-gray-500">
               Choose from popular frameworks and libraries
             </p>
           </div>
         </section>
-        <section className="my-5 mx-[300] border-3 rounded-xl p-10">
+        <section className="mx-auto max-w-[90rem] border-3 rounded-xl p-10">
           <div className="flex flex-col gap-10">
             <div className="flex flex-row justify-center items-center gap-3">
               <div
@@ -209,7 +209,7 @@ export default function Home() {
                 </div>
                 {/*-- Technology Selection --*/}
                 <section className={`${steps === 0 ? "block" : "hidden"}`}>
-                  <div className="flex flex-row gap-3">
+                  <div className="flex flex-row flex-wrap gap-3">
                     {filteredFrontendTechnologies.length > 0 ? (
                       filteredFrontendTechnologies.map((technology) => (
                         <Techbox
