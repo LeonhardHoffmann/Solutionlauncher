@@ -28,6 +28,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased overflow-hidden`}
       >
@@ -42,7 +45,7 @@ export default function RootLayout({
             <main>
               <div className="flex flex-row justify-between items-center">
                 <SidebarTrigger />
-                <StarRepoBtn className="mr-5"/>
+                <StarRepoBtn className="mr-5" />
               </div>
               {children}
             </main>
